@@ -93,17 +93,20 @@
     border-bottom:1px solid var(--ink-border);
   }
   .nav{display:flex; align-items:center; justify-content:space-between; height:64px;}
-  .brand{display:flex; align-items:center; gap:.6rem; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:1rem;}
-  .brand-mark{
-    width:30px; height:30px; border-radius:8px;
-    background:linear-gradient(155deg,var(--amber),var(--amber-dim));
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 4px 14px rgba(243,186,47,.25);
+  .wordmark{
+    font-family:'JetBrains Mono',monospace; font-weight:600; font-size:.95rem;
+    color:var(--ink-text); letter-spacing:.02em;
   }
-  .brand-mark svg{width:16px; height:16px;}
-  .nav-links{display:flex; align-items:center; gap:2rem;}
-  .nav-links a{font-size:.88rem; color:var(--ink-muted); transition:color .2s;}
+  .wm-dot{color:var(--amber); animation:blink 1.6s infinite;}
+  .nav-links{display:flex; align-items:center; gap:1.7rem;}
+  .nav-links a{font-size:.85rem; color:var(--ink-muted); transition:color .2s;}
   .nav-links a:hover{color:var(--ink-text);}
+  .nav-follow{
+    font-family:'JetBrains Mono',monospace; font-size:.78rem !important;
+    color:var(--amber) !important; border:1px solid rgba(243,186,47,.35);
+    padding:.42rem .85rem; border-radius:999px;
+  }
+  .nav-follow:hover{border-color:var(--amber); background:rgba(243,186,47,.08);}
   .btn{
     font-family:'Inter',sans-serif; font-weight:600; font-size:.86rem;
     padding:.7rem 1.3rem; border-radius:999px; border:1px solid transparent;
@@ -486,22 +489,12 @@ button.btn{-webkit-appearance:none; appearance:none;}
 
 <header>
   <div class="wrap nav">
-    <div class="brand">
-      <span class="brand-mark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#1a1300" stroke-width="2" stroke-linecap="round"><path d="M4 18V10M12 18V4M20 18v-6"/></svg>
-      </span>
-      Oh My Binance
-    </div>
+    <a class="wordmark" href="#top">oh·my·binance<span class="wm-dot">_</span></a>
     <nav class="nav-links">
-      <a href="#architecture">System</a>
-      <a href="#catalog">Skills</a>
-      <a href="#examples">Live Examples</a>
-      <a href="#setup">Setup</a>
+      <a href="#examples">Examples</a>
+      <a href="#setup">Install</a>
       <a href="#faq">FAQ</a>
-      <a class="btn btn-primary btn-sm" href="#follow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        Follow
-      </a>
+      <a class="nav-follow" href="#follow">@BNB_Wizard ↗</a>
     </nav>
   </div>
 </header>
@@ -514,13 +507,13 @@ button.btn{-webkit-appearance:none; appearance:none;}
     <h1 class="reveal" style="transition-delay:.05s">Oh My Binance</h1>
     <p class="lead reveal" style="transition-delay:.1s">The Binance-only research layer for AI agents. It turns live market, derivatives, and Web3 evidence into clear trader explanations — without becoming a multi-exchange black box.</p>
     <div class="hero-ctas reveal" style="transition-delay:.15s">
-      <a href="#follow" class="btn btn-primary">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        Get the toolkit
-      </a>
-      <a href="#architecture" class="btn btn-ghost">
+      <button class="btn btn-primary dl-zip" id="dlZipBtnHero" data-zip="https://hermesagent01.github.io/oh-my-binance/oh-my-binance.zip?v=3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+        Download the skill library
+      </button>
+      <a href="#examples" class="btn btn-ghost">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-        Inspect the system
+        See it working
       </a>
     </div>
     <div class="stat-row reveal" style="transition-delay:.2s">
@@ -741,7 +734,7 @@ button.btn{-webkit-appearance:none; appearance:none;}
     </div>
     <div class="wiz-hint reveal" style="transition-delay:.2s">Click / tap anywhere in this section — <i>the balls are real physics</i> · <span style="color:var(--amber)">build v2.1</span></div>
     <div class="reveal" style="transition-delay:.25s; margin-top:1.1rem; display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap;">
-      <button class="btn btn-ghost dl-zip" id="dlZipBtn" data-zip="https://hermesagent01.github.io/oh-my-binance/oh-my-binance.zip?v=3">
+      <button class="btn btn-primary dl-zip" id="dlZipBtn2" data-zip="https://hermesagent01.github.io/oh-my-binance/oh-my-binance.zip?v=3">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
         Download the skill library (.zip)
       </button>
@@ -749,19 +742,13 @@ button.btn{-webkit-appearance:none; appearance:none;}
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 015.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.66.41.35.78 1.05.78 2.12v3.14c0 .3.21.67.8.55A11.51 11.51 0 0023.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
         Install via git clone
       </a>
-    </div>
-  </div>
+    </div></div>
 </section>
 
 <footer class="section-dark">
   <div class="wrap foot-row">
     <div>
-      <div class="brand" style="margin-bottom:.6rem;">
-        <span class="brand-mark" style="width:24px;height:24px;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#1a1300" stroke-width="2" stroke-linecap="round"><path d="M4 18V10M12 18V4M20 18v-6"/></svg>
-        </span>
-        Oh My Binance
-      </div>
+      <div class="wordmark" style="margin-bottom:.6rem;">oh·my·binance<span class="wm-dot">_</span></div>
       <p>Independent research layer built on official exchange and on-chain data. Not financial advice.</p>
     </div>
     <div class="foot-links">
@@ -1276,31 +1263,39 @@ filterExamples();
   }
   requestAnimationFrame(tick);
 
-  // robust zip download: blob -> save (bypasses in-app browser blocking)
-  const dlBtn=document.getElementById('dlZipBtn');
-  if(dlBtn){
-    dlBtn.addEventListener('click', async ()=>{
-      const url=dlBtn.dataset.zip;
-      const label=dlBtn.innerHTML;
-      dlBtn.innerHTML='Preparing download…';
+  // robust zip download: bind EVERY .dl-zip button; try anchor-download first, blob fallback, direct open last
+  async function doZipDownload(btn){
+    const url=btn.dataset.zip;
+    const label=btn.innerHTML;
+    btn.innerHTML='Preparing download…';
+    const done=(msg)=>{ btn.innerHTML=msg||'✓ Downloaded'; setTimeout(()=>btn.innerHTML=label,2500); };
+    try{
+      // Method 1: fetch -> object URL -> anchor (most reliable for in-app browsers)
+      const res=await fetch(url,{cache:'reload',mode:'cors'});
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      const blob=await res.blob();
+      const a=document.createElement('a');
+      a.href=URL.createObjectURL(blob);
+      a.download='oh-my-binance.zip';
+      a.rel='noopener';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(a.href),8000);
+      done();
+    }catch(e1){
+      // Method 2: plain anchor with download attr (same-origin cases)
       try{
-        const res=await fetch(url,{cache:'reload'});
-        if(!res.ok) throw new Error('HTTP '+res.status);
-        const blob=await res.blob();
         const a=document.createElement('a');
-        a.href=URL.createObjectURL(blob);
-        a.download='oh-my-binance.zip';
+        a.href=url; a.download='oh-my-binance.zip'; a.target='_blank'; a.rel='noopener';
         document.body.appendChild(a); a.click(); a.remove();
-        setTimeout(()=>URL.revokeObjectURL(a.href),4000);
-        dlBtn.innerHTML='✓ Downloaded';
-        setTimeout(()=>dlBtn.innerHTML=label,2500);
-      }catch(err){
-        // fallback: open directly (browser handles it)
-        window.open(url,'_blank');
-        dlBtn.innerHTML=label;
+        done('Opening…');
+      }catch(e2){
+        // Method 3: last resort — window.open
+        window.open(url,'_blank','noopener');
+        done('Opened in new tab');
       }
-    });
+    }
   }
+  document.querySelectorAll('.dl-zip').forEach(b=>b.addEventListener('click', e=>{ e.preventDefault(); doZipDownload(b); }));
 
   // magnetic button
   const btn=document.querySelector('.wiz-btn');
