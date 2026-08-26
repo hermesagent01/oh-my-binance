@@ -402,6 +402,46 @@ button.btn{-webkit-appearance:none; appearance:none;}
 .ex-prompt{font-size:.86rem;line-height:1.5;color:var(--paper-ink);font-weight:500;
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 .ex-tags{display:flex;gap:.35rem;flex-wrap:wrap;}
+/* ---- special skills ---- */
+.special-section{position:relative;}
+.special-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-top:1.6rem;}
+@media (max-width:980px){.special-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:600px){.special-grid{grid-template-columns:1fr;}}
+.special-card{
+  position:relative;border-radius:14px;padding:1px;cursor:pointer;background:#15171c;
+  transition:transform .25s var(--ease);}
+.special-card:hover{transform:translateY(-4px);}
+.special-card::before{
+  content:'';position:absolute;inset:0;border-radius:14px;padding:1px;
+  background:conic-gradient(from var(--sp-a,0deg),#f0b90b,#ff9d4d,#7b61ff,#2ebd85,#f0b90b);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  animation:spBorder 6s linear infinite;}
+.special-card:nth-child(2)::before{animation-delay:-1.5s;}
+.special-card:nth-child(3)::before{animation-delay:-3s;}
+.special-card:nth-child(4)::before{animation-delay:-4.5s;}
+@property --sp-a{syntax:'<angle>';initial-value:0deg;inherits:false;}
+@keyframes spBorder{to{--sp-a:360deg;}}
+@supports not (background:conic-gradient(from var(--sp-a,0deg),red,blue)){
+  .special-card{border:1px solid #f0b90b;}
+  .special-card::before{display:none;}
+}
+.special-inner{
+  background:var(--ink,#15171c);border-radius:13px;padding:1.15rem 1.1rem;height:100%;
+  display:flex;flex-direction:column;gap:.5rem;}
+.special-inner{background:#15171c;}
+.special-sym{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.08em;
+  color:#f0b90b;border:1px solid rgba(240,185,11,.4);padding:.16rem .5rem;border-radius:5px;
+  width:max-content;text-transform:uppercase;}
+.special-name{font-weight:700;font-size:1.02rem;color:#fff;line-height:1.25;}
+.special-desc{font-size:.8rem;color:#9aa0aa;line-height:1.45;}
+.special-cta{margin-top:auto;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#f0b90b;
+  display:flex;align-items:center;gap:.4rem;}
+.special-cta::after{content:'→';transition:transform .2s;}
+.special-card:hover .special-cta::after{transform:translateX(4px);}
+.special-section .section-head h2{color:#fff;}
+.special-section .section-head .eyebrow{color:#f0b90b;}
+.special-section .section-head p{color:#9aa0aa;}
 .ex-skill{font-family:'JetBrains Mono',monospace;font-size:.62rem;text-transform:none;letter-spacing:.02em;
   color:#0b2d13;background:#cfe9d6;border:1px solid rgba(46,125,50,.4);padding:.15rem .45rem;border-radius:5px;font-weight:600;}
 .ex-modal .ex-skill{display:inline-block;}
@@ -654,6 +694,51 @@ button.btn{-webkit-appearance:none; appearance:none;}
     <span class="catalog-count reveal" id="skillCount">56 skills shown</span>
 
     <div class="skill-grid" id="skillGrid"></div>
+  </div>
+</section>
+
+
+<section class="section section-dark special-section" id="special">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Special skills</span>
+      <h2>Four skills, four live runs</h2>
+      <p>Every card below was executed against Binance Agent OS on Aug 26 — click one to see the exact prompt and the full result it returned.</p>
+    </div>
+    <div class="special-grid reveal">
+      <div class="special-card" data-run="0" tabindex="0" role="button" aria-label="Open support-resistance example">
+        <div class="special-inner">
+          <span class="special-sym">SOL</span>
+          <span class="special-name">support-resistance</span>
+          <span class="special-desc">Swing-pivot S/R clustering + live book walls</span>
+          <span class="special-cta">Live run · Aug 26</span>
+        </div>
+      </div>
+      <div class="special-card" data-run="1" tabindex="0" role="button" aria-label="Open range-trading example">
+        <div class="special-inner">
+          <span class="special-sym">BNB</span>
+          <span class="special-name">range-trading</span>
+          <span class="special-desc">Range + MSB trigger status with plan math</span>
+          <span class="special-cta">Live run · Aug 26</span>
+        </div>
+      </div>
+      <div class="special-card" data-run="2" tabindex="0" role="button" aria-label="Open daily-brief example">
+        <div class="special-inner">
+          <span class="special-sym">MARKET</span>
+          <span class="special-name">daily-brief</span>
+          <span class="special-desc">One page: moves, breadth, funding, tomorrow's levels</span>
+          <span class="special-cta">Live run · Aug 26</span>
+        </div>
+      </div>
+      <div class="special-card" data-run="3" tabindex="0" role="button" aria-label="Open coin-ta example">
+        <div class="special-inner">
+          <span class="special-sym">BTC</span>
+          <span class="special-name">coin-ta</span>
+          <span class="special-desc">Five-skill TA pipeline into one verdict</span>
+          <span class="special-cta">Live run · Aug 26</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1168,6 +1253,21 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeExample(); }
 // init grid
 EX_DATA.forEach(it=>exGrid.appendChild(exCard(it)));
 filterExamples();
+
+// ---------- special skills: live runs ----------
+window.OMB_SPECIAL_RUNS = [{"skill":"support-resistance","prompt":"What are the key support and resistance levels for SOL right now?","response":"**LEVELS — SOL @ 95.72** (as of Aug 26, ~16:31 UTC; 4H pivot clusters + live book)\n\n**Resistance (nearest first)**\n\n| Level | Source | Note |\n|---|---|---|\n| 96.27–96.33 | 4H pivots + book | 1,213 + 1,169 SOL stacked at 96.27/96.32 — the lid |\n| 96.70 | book | **2,771 SOL** — heaviest ask in top-100 |\n| 97.21–97.88 | 4H swing highs (Aug 24-25) | double-top zone, today's bounce died at 97.88 |\n| 98.83 | 24h high | supply above the coil |\n\n**Support (nearest first)**\n\n| Level | Source | Note |\n|---|---|---|\n| 95.33–95.42 | book | 1,088 + 1,123 SOL — first defense |\n| 95.00–95.13 | book + round number | **1,796 SOL @ 95.00, 1,298 @ 95.13, 2,496 @ 94.91** — the wall |\n| 94.95 | today's low | sweep already survived once |\n| 93.26–93.47 | 4H swing lows | rising-lows line — the structure line |\n| 92.58 | 4H swing low (Aug 24) | deeper shelf |\n\n**Book read (OBSERVED):** bids dominate — roughly $1.5M+ visible inside 1% below vs ~$0.9M above. The 94.91–95.13 stack is the single densest zone on either side.\n\n**Trading read:** price is coiled between the 95.00 bid wall and the 96.27–96.33 supply shelf — a 1.3% band. The rising-lows line (93.26 → 93.47) says sellers are losing ground each test; the falling highs (97.21 → 96.33) say buyers can't yet break out. Triangle resolution pending; the 2,496-SOL wall at 94.91 is what a breakdown has to eat first.\n\nLevels trace to the pulled 4H series and live depth snapshot; touches define strength.\n\n*Not financial advice.*","tags":["SOL","levels"],"data_note":"Live run: Aug 26, 16:31 UTC Agent OS pull"},{"skill":"range-trading","prompt":"Is BNB still ranging and is a breakout setting up?","response":"**RANGE — BNB @ 696.52** (as of Aug 26, ~16:31 UTC)\n\n- **Boundaries:** 688.00 – 726.08 (7-day 4H swings) → width **5.53%** — valid range\n- **Mid:** 707.04 · **Position:** **23% up the range** (lower half)\n- **Internal bias:** LH/LL below mid — 4H highs 719.18 → 708.06, lows 700.10 → 690.50 → 688.00. Bearish drift inside the box.\n\n**MSB status: WATCHING — still no trigger.**\n- Key 1H swing low: **688.00** (Aug 25). Today's low 692.10 (18:40-19:00 bars) never tested it. Latest close 696.52.\n- Today's shape: rejection at **708.06** (16:00 bar — the exact 2× resistance cluster), sell-off to 692.10, stablise ~696. Selling into support, but no CLOSE through it.\n\n**The contradiction deepening (OBSERVED):** funding printed **+0.0577%/8h** — the *highest of the last five prints* (+0.032 → +0.045 → +0.028 → +0.050 → +0.058) — while price sits at the range floor. Longs are paying MORE to stay in a falling market at support. Perp basis +0.5bps premium. This is crowded-long fragility: if 688 gives on a close, the unwind has fuel.\n\n**Edge math (analytical):** from 689–693 zone: SL 686 (below floor) ≈ 5 risk; TP1 707 mid ≈ 15 (**3.0:1**); TP2 719–726 ≈ 28 (**5.6:1**). Only live while 688 holds.\n\n**Invalidation:** 4H close < 688.00 = range broken, thesis void. **Watch:** any 1H close < 688 = the early MSB trigger.\n\n**CONFIDENCE: medium** — structure intact, crowd dangerous.\n\n*Not financial advice.*","tags":["BNB","range"],"data_note":"Live run: Aug 26, 16:31 UTC Agent OS pull"},{"skill":"daily-brief","prompt":"Give me today's market brief.","response":"**DAILY BRIEF — Aug 26, 2026** (data ~16:31 UTC)\n\n**WHAT MOVED**\n\n| Asset | Last | 24h | Vol |\n|---|---|---|---|\n| BTC | 78,037.87 | -1.55% | $1.22B |\n| ETH | 2,448.81 | -1.08% | $592.0M |\n| SOL | 95.72 | -2.49% | $224.1M |\n| BNB | 696.52 | -0.30% | $92.0M |\n\n**BREADTH — third red day running.** 7/7 sampled alts down: PEPE -7.34%, SUI -6.67%, XRP -6.60%, DOGE -5.58%, ADA -5.48%, AVAX -3.73%, LINK -2.89%. The streak: 17/18 red, then 11/11, now 7/7 — no bounce attempt anywhere in the alt complex.\n\n**DERIVATIVES** — BNB funding **+0.0577%/8h — a new 5-print high** — the lone positive major, longs paying more as price falls toward its range floor. BTC -0.036%, perp discount *widened* -2.9 → **-5.1bps**. SOL -0.052% (shorts pay).\n\n**STRUCTURE** — BTC: second consecutive 4H close below the broken 78,312 swing low; now pressing the 77,844–77,856 support cluster, range floor 77,632.58 under it. BNB: range 688–726 intact but LH/LL in the lower half; 708.06 rejection today. SOL: compressing triangle — lows rising (93.26 → 93.47), highs falling (97.21 → 96.33).\n\n**UNUSUAL** — SOL's book is a one-way bid wall: **2,496 SOL @ 94.91, 1,796 @ 95.00, 1,298 @ 95.13** — ~$1.5M of visible bids vs ~$0.9M asks — while funding is -0.052% (crowded short). Rising lows + thick bids + paying shorts = squeeze geometry, into falling highs.\n\n**TOMORROW'S LEVELS** — BTC: 77,844 → 77,632 floor → 78,312 reclaim. BNB: 688 floor → 697 → 707 mid. SOL: 94.91-95.13 wall → 96.33 lid.\n\n*Not financial advice.*\n\n**CONFIDENCE: high** — one pull, three days of consistent breadth deterioration.","tags":["briefing"],"data_note":"Live run: Aug 26, 16:31 UTC Agent OS pull"},{"skill":"coin-ta","prompt":"Run full TA on BTC.","response":"**COIN TA — BTC @ 78,037.87** (Aug 26, ~16:31 UTC)\n\n**PIPELINE:** market-structure → support-resistance → range-trading → funding/basis → orderbook ✓ all five ran\n\n**STRUCTURE** — **4H MSB DOWN, second close below.** Broke 78,312 (Aug 25 20:00 swing low), closed 78,011, now 78,033 — held under for two consecutive 4H bars. Off the 81,273 top: three lower highs (79,563 → 79,251 → 79,206). Trend state: breakdown in progress.\n\n**LEVELS** — Support: **77,844–77,856 (2×) — being tested now**, then 77,153 (3×), then the most-tested level in the window **76,818 (6×)**. Resistance: 78,226 (3×, flipped today) → the reclaim line **78,312** → 79,906 (3×) → 80,872 (2×) → 81,273.\n\n**RANGE/MSB** — Range 77,632.58–81,272.62 (4.68%) is broken at the floor. Not a range play anymore: it's a support-test sequence. Below the 77,632 floor on a 4H close = range failure, air to 77,153, then 76,818.\n\n**POSITIONING** — funding **-0.036%/8h** (shorts pay) and perp basis widened to **-5.1bps discount** — perps leading spot down, shorts leaning harder into the break. Crowded shorts is the reclaim fuel.\n\n**BOOK** — thin both sides (~$0.25M top-100), layered program clips; no wall stands between price and 77,844. Structure will decide, not order flow.\n\n**VERDICT** — Bearish structure, crowded bearish positioning. Continuation needs a 4H close through 77,844 then 77,632; failure to break the floor while shorts pay builds squeeze risk on any 4H reclaim of 78,312 — with -5.1bps discount, perp shorts are already paying for the privilege. **Gates:** 4H close < 77,632 = failure confirmed → 76,818 target. 4H close > 78,312 = breakdown fails → squeeze watch. Between them: chop.\n\n*Not financial advice.* **CONFIDENCE: high** — two closes below structure, contradictions named.","tags":["BTC","ta"],"data_note":"Live run: Aug 26, 16:31 UTC Agent OS pull"}];
+(function(){
+  document.querySelectorAll('.special-card').forEach(card=>{
+    const run = window.OMB_SPECIAL_RUNS[+card.dataset.run];
+    if(!run) return;
+    const open = ()=>{
+      openExample({n:'LIVE', prompt: run.prompt, response: run.response,
+                   skill: run.skill, data_note: run.data_note, tags: run.tags});
+    };
+    card.addEventListener('click', open);
+    card.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); } });
+  });
+})();
 
 // ---------- @BNB_Wizard physics playground ----------
 (function(){
