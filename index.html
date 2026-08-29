@@ -120,11 +120,19 @@
     border-bottom:1px solid var(--ink-border);
   }
   .nav{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .nav-left{display:flex; align-items:center; gap:1rem;}
   .wordmark{
     font-family:'JetBrains Mono',monospace; font-weight:600; font-size:.95rem;
     color:var(--ink-text); letter-spacing:.02em;
   }
   .wm-dot{color:var(--amber); animation:blink 1.6s infinite;}
+  .nav-social{
+    font-family:'JetBrains Mono',monospace; font-size:.72rem;
+    color:var(--ink-muted); border:1px solid var(--ink-border);
+    padding:.3rem .7rem; border-radius:999px; white-space:nowrap;
+    transition:color .2s, border-color .2s;
+  }
+  .nav-social:hover{color:var(--amber); border-color:var(--amber);}
   .nav-links{display:flex; align-items:center; gap:1.7rem;}
   .nav-links a{font-size:.85rem; color:var(--ink-muted); transition:color .2s;}
   .nav-links a:hover{color:var(--ink-text);}
@@ -147,7 +155,33 @@ button.btn{-webkit-appearance:none; appearance:none;}
   .btn-ghost{background:transparent; border-color:var(--ink-border); color:var(--ink-text);}
   .btn-ghost:hover{border-color:var(--amber); transform:translateY(-2px);}
   .btn-sm{padding:.5rem 1rem; font-size:.78rem;}
-  @media (max-width:760px){.nav-links a:not(.btn){display:none;}}
+  @media (max-width:760px){
+    .nav-links a:not(.btn){display:none;}
+    .nav-left{gap:.6rem;}
+    .nav-social{font-size:.65rem; padding:.25rem .55rem;}
+    .wordmark{font-size:.82rem;}
+    .nav{height:56px;}
+    .hero{padding-top:4rem;}
+    .hero h1{font-size:clamp(1.8rem,6vw,2.8rem);}
+    .hero .lead{font-size:.95rem;}
+    .section{padding:3rem 0;}
+    .section-head h2{font-size:clamp(1.4rem,4vw,2rem);}
+    .skill-grid{gap:.6rem;}
+    .skill-card{padding:.9rem;}
+    .skill-name{font-size:.8rem;}
+    .skill-desc{font-size:.8rem;}
+    .ex-grid{gap:.8rem;}
+    .ex-card{padding:1rem;}
+    .ex-num{font-size:.7rem;}
+    .ex-prompt{font-size:.85rem;}
+    .chip-row{gap:.4rem;}
+    .chip{font-size:.72rem; padding:.4rem .7rem;}
+    .faq-q{font-size:.9rem;}
+    .faq-a{font-size:.85rem;}
+    .special-grid{gap:.8rem;}
+    .special-card{padding:1.2rem;}
+    .wiz-btn{font-size:.85rem; padding:.7rem 1.5rem;}
+  }
 
   /* ---------- hero ---------- */
   .hero{position:relative; padding:5.5rem 0 0; overflow:hidden;}
@@ -328,6 +362,30 @@ button.btn{-webkit-appearance:none; appearance:none;}
   .skill-desc{font-size:.85rem; line-height:1.5; color:var(--paper-muted); margin-bottom:.75rem;}
   .skill-cat{font-family:'JetBrains Mono',monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.06em; color:var(--cat-color);}
   .skill-card.hide{display:none;}
+  .skill-card{cursor:pointer; position:relative;}
+  .skill-expand{
+    display:none; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--paper-border);
+  }
+  .skill-card.open .skill-expand{display:block; animation:fadeSlideIn .3s var(--ease) both;}
+  .skill-expand-prompt{
+    font-family:'JetBrains Mono',monospace; font-size:.78rem; color:var(--paper-ink);
+    background:var(--paper-bg); border:1px solid var(--paper-border); border-radius:8px;
+    padding:.8rem 1rem; margin-bottom:.8rem; line-height:1.6;
+  }
+  .skill-expand-prompt::before{content:'PROMPT'; display:block; font-size:.6rem; letter-spacing:.1em;
+    color:var(--amber); margin-bottom:.4rem; font-weight:600;}
+  .skill-expand-output{
+    font-size:.82rem; line-height:1.7; color:var(--paper-muted);
+    background:var(--paper-bg); border:1px solid var(--paper-border); border-radius:8px;
+    padding:.8rem 1rem; max-height:400px; overflow-y:auto; white-space:pre-wrap;
+    font-family:'JetBrains Mono',monospace; font-size:.75rem;
+  }
+  .skill-expand-output::before{content:'OUTPUT'; display:block; font-size:.6rem; letter-spacing:.1em;
+    color:var(--teal); margin-bottom:.4rem; font-weight:600;}
+  .skill-expand-close{
+    font-size:.7rem; color:var(--amber); cursor:pointer; margin-top:.6rem; display:inline-block;
+  }
+  @keyframes fadeSlideIn{from{opacity:0; transform:translateY(-8px);}to{opacity:1; transform:none;}}
 
   /* web3 layer */
   .launcher-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:.8rem;}
@@ -572,12 +630,15 @@ button.btn{-webkit-appearance:none; appearance:none;}
 
 <header>
   <div class="wrap nav">
-    <a class="wordmark" href="#top">oh·my·binance<span class="wm-dot">_</span></a>
+    <div class="nav-left">
+      <a class="wordmark" href="#top">oh·my·binance<span class="wm-dot">_</span></a>
+      <a class="nav-social" href="https://t.me/loki_bnb" target="_blank" rel="noopener">Telegram</a>
+      <a class="nav-social" href="https://x.com/BNB_Wizard" target="_blank" rel="noopener">@BNB_Wizard ↗</a>
+    </div>
     <nav class="nav-links">
       <a href="#examples">Examples</a>
       <a href="#setup">Install</a>
       <a href="#faq">FAQ</a>
-      <a class="nav-follow" href="#follow">@BNB_Wizard ↗</a>
     </nav>
   </div>
 </header>
@@ -590,11 +651,11 @@ button.btn{-webkit-appearance:none; appearance:none;}
     <h1 class="reveal" style="transition-delay:.05s">Oh My Binance</h1>
     <p class="lead reveal" style="transition-delay:.1s">The Binance-only research layer for AI agents, powered by <strong>Binance Agent OS</strong> — live market, derivatives and Web3 evidence turned into clear trader explanations, without becoming a multi-exchange black box.</p>
     <div class="hero-ctas reveal" style="transition-delay:.15s">
-      <button class="btn btn-primary dl-zip" id="dlZipBtnHero" data-zip="https://hermesagent01.github.io/oh-my-binance/oh-my-binance.zip?v=3">
+      <a href="https://github.com/hermesagent01/oh-my-binance/raw/main/oh-my-binance.zip" class="btn btn-primary" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
         Download the skill library
-      </button>
-      <a href="https://github.com/hermesagent01/oh-my-binance-skills/raw/main/oh-my-binance-skills.zip" class="btn btn-ghost" id="dlSkillOnly" download>
+      </a>
+      <a href="https://github.com/hermesagent01/oh-my-binance-skills/raw/main/oh-my-binance-skills.zip" class="btn btn-ghost" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
         Download Skill Only (.zip)
       </a>
@@ -773,17 +834,6 @@ button.btn{-webkit-appearance:none; appearance:none;}
   </div>
 </section>
 
-<section class="section section-alt-dark">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">Official Web3 layer</span>
-      <h2>Local launchers with real checks</h2>
-      <p>Each launcher runs on-device, against live official endpoints — nothing here is simulated.</p>
-    </div>
-    <div class="launcher-grid" id="launcherGrid"></div>
-  </div>
-</section>
-
 <section class="section section-dark" id="setup">
   <div class="wrap">
     <div class="section-head reveal">
@@ -840,6 +890,16 @@ button.btn{-webkit-appearance:none; appearance:none;}
   </div>
 </section>
 
+<section class="section section-alt-dark">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Official Web3 layer</span>
+      <h2>Local launchers with real checks</h2>
+      <p>Each launcher runs on-device, against live official endpoints — nothing here is simulated.</p>
+    </div>
+    <div class="launcher-grid" id="launcherGrid"></div>
+  </div>
+</section>
 
 <section class="section section-paper" id="examples">
   <div class="wrap">
@@ -874,17 +934,17 @@ button.btn{-webkit-appearance:none; appearance:none;}
     </div>
     <div class="wiz-hint reveal" style="transition-delay:.2s">Click / tap anywhere in this section — <i>the balls are real physics</i> · <span style="color:var(--amber)">build v2.1</span></div>
     <div class="reveal" style="transition-delay:.25s; margin-top:1.1rem; display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap;">
-      <button class="btn btn-primary dl-zip" id="dlZipBtn2" data-zip="https://hermesagent01.github.io/oh-my-binance/oh-my-binance.zip?v=3">
+      <a href="https://github.com/hermesagent01/oh-my-binance/raw/main/oh-my-binance.zip" class="btn btn-primary" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
         Download the skill library (.zip)
-      </button>
-      <a href="https://github.com/hermesagent01/oh-my-binance-skills/raw/main/oh-my-binance-skills.zip" class="btn btn-ghost" id="dlSkillOnly2" download>
+      </a>
+      <a href="https://github.com/hermesagent01/oh-my-binance-skills/raw/main/oh-my-binance-skills.zip" class="btn btn-ghost" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
         Download Skill Only (.zip)
       </a>
-      <a class="btn btn-ghost" href="https://github.com/hermesagent01/omb-skill-library" target="_blank" rel="noopener">
+      <a class="btn btn-ghost" href="https://github.com/hermesagent01/oh-my-binance" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 015.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.66.41.35.78 1.05.78 2.12v3.14c0 .3.21.67.8.55A11.51 11.51 0 0023.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
-        Install via git clone
+        View on GitHub
       </a>
     </div></div>
 </section>
@@ -978,6 +1038,57 @@ const SKILLS = [
 
 const LAUNCHERS = ['query-token-info','query-token-audit','query-address-info','crypto-market-rank','meme-rush','trading-signal','binance-trading-signal','binance-wallet-tracker','binance-leaderboard'];
 
+// ---------- BNB skill examples (1 per skill) ----------
+const SKILL_EXAMPLES = {
+'coin-ta':{prompt:'Run full technical analysis on BNBUSDT \u2014 1D/4H/1H structure, levels, range, funding, order book',output:'\u2550\u2550\u2550 FULL TA READOUT \u2014 BNBUSDT \u2550\u2550\u2550\n1D BIAS: HH+HL (bullish) | last $689.12 | range $546.84\u2013$727.15 (33.0%) | RSI 76.5\n4H SETUP: Mixed | range $677.29\u2013$719.14 (6.2%) | price at 81% of range | RSI 28.6\n1H ENTRY: last 1H swing hi $689.82 / lo $687.20 | RSI 48.8 | ATR $2.03\nORDER FLOW: Funding +0.0043% | OI $434.2M (48h -1.0%) | CVD 1H +$0.8M/hr\nVERDICT: \ud83d\udd34 STAND ASIDE \u2014 4H range width 6.2% at threshold. ADX 29.5 confirms trending.\nWATCH: 1H MSB close above $689.82 (long) / below $687.20 (short)'},
+'funding-analysis':{prompt:'What is BNB perpetual funding rate, trend, and regime?',output:'$BNB FUNDING ANALYSIS\nCurrent: +0.0043% per 8h (0.0516% annualized)\nRegime: NORMAL (<0.01% threshold)\n24h avg: +0.048% | 7d avg: +0.031%\nTrend: Flat \u2192 declining\nSqueeze potential: LOW \u2014 funding far from crowded thresholds\nVerdict: No actionable funding signal. Wait for regime shift.'},
+'orderbook-analysis':{prompt:'Analyze BNB bid/ask pressure and notable walls',output:'$BNB ORDER BOOK\nSpread: $0.01 (0.001%) \u2014 EXCELLENT\nTop-50 bids: 582.5 BNB ($401K) | asks: 530.2 BNB ($365K)\nBid/Ask ratio: 1.10x \u2014 slightly bid-heavy\nLargest bid: $688.07 (57.6 BNB / $39.7K) \u2014 whale absorption\nLargest ask: $689.98 (62.1 BNB / $42.8K) \u2014 whale supply\nSlippage: $10K <0.01% | $100K ~0.05% | $500K ~0.15%\nVerdict: Balanced book with slight bid support.'},
+'market-structure':{prompt:'Map BNB trend state, ranges, and key structural levels',output:'$BNB MARKET STRUCTURE\n1D: HH+HL (bullish) from $546. Range $547\u2013$727 (33%).\n4H: BEARISH lower highs $719\u2192$716\u2192$708\u2192$691. Flat lows at $685 = descending triangle.\n1H: FLAT $687\u2013$690 tight compression.\nKey levels: $719 (must clear), $708 (resistance), $697 (SMA7), $685 (CRITICAL), $677 (breakdown).'},
+'liquidity-analysis':{prompt:'Assess BNB liquidity quality \u2014 depth, spread, slippage risk',output:'$BNB LIQUIDITY\nSpread: 0.001% \u2014 EXCELLENT\nDepth: ~$400K each side at \u00b11% \u2014 HIGH\nSlippage: $100K order <0.05%\nQuality Score: 9/10 \u2014 INSTITUTIONAL GRADE\nVerdict: World-class liquidity. Safe for position sizing up to $100K.'},
+'volatility-analysis':{prompt:'What is BNB volatility regime \u2014 squeeze or expansion?',output:'$BNB VOLATILITY\nATR(14) 1D: $20.33 (2.95%) \u2014 declining from $35 peak\nBB Width 4H: 4.3% (NARROW \u2014 compression)\nRegime: POST-EXPANSION \u2192 COMPRESSION (squeeze building)\nSqueeze score: 7/10 \u2014 expected resolution within 2-3 days\nDirection bias: Slightly bearish (lower highs + 1D overbought)'},
+'range-trading':{prompt:'Is BNB ranging? Where are the boundaries?',output:'$BNB RANGE\n4H range: $677.29\u2013$719.14 (6.2% width) \u2014 BORDERLINE\nPosition: 81% up the range (near top)\nInternal bias: LH/LL below mid \u2014 bearish drift\nMSB status: WATCHING \u2014 no trigger\n1H: $687\u2013$690 tight compression\nVerdict: Neither engine active. WAIT setup.'},
+'support-resistance':{prompt:'Map support and resistance levels for BNB',output:'$BNB S/R LEVELS\nResistance: $689.82 (1H) \u2192 $700.35 (4H mid) \u2192 $708.71 (cluster) \u2192 $719.14 (swing) \u2192 $727.15 (30d)\nSupport: $687.20 (1H) \u2192 $685.39 (24h low/BB) \u2192 $677.29 (4H swing) \u2192 $655.16 (BB lower)\nPrice $689 is $2.92 ABOVE 1H support, $8.06 BELOW 1H resistance.\nS/R flip: $685.39 was resistance, now support. $697.18 was support, now resistance.'},
+'volume-analysis':{prompt:'Abnormal volume detection and interpretation',output:'$BNB VOLUME\n24h: $81.3M (1.25x 14d avg) \u2014 NORMAL\nTrend: Declining from $987M peak (Aug 24) \u2014 92% contraction\nVolume Profile: HVN $697\u2013$702, LVN $685\u2013$690, POC ~$697\nPrice below POC = bearish\nNo climax detected. Dry-up approaching (<0.5x avg).\nVerdict: Distribution/consolidation after rally.'},
+'market-data':{prompt:'Raw market data pull for BNB',output:'$BNB/USDT DATA\nLast: $689.12 | 24h: $704.79\u2013$707.94\u2013$685.39 (-2.22%)\nVol: $81.3M (117K BNB, 681K trades)\nSpread: $0.01 | Bid depth: 582.5 BNB | Ask: 530.2 BNB\nFunding: +0.0043% | OI: $434.2M (-1.0% 48h)\nRSI: 1D 76.5 | 4H 28.6 | 1H 48.8\nBB: 1D $655\u2013$735 | 4H $685\u2013$715'},
+'token-profile':{prompt:'Complete token identity for BNB',output:'$BNB PROFILE\nName: BNB (Build and Build) | Chain: BNB Chain | Type: L1 + Exchange utility\nLaunch: July 2017 (ICO at $0.15) | Age: 7+ years\nMCap: ~$100.4B | Supply: 145.9M/200M | Burned: ~54.1M (27%)\nUse cases: Chain gas, trading discounts, Launchpad, DeFi, staking\nEcosystem: TVL $5.5B, DAU 1.2M, 3M daily transactions\nRisk: Concentrated in Binance ecosystem.'},
+'token-security':{prompt:'Check BNB contract security and audit status',output:'$BNB SECURITY\nType: Native L1 token (not smart contract) \u2014 contract risk N/A\nSupply: Auto-burn reducing quarterly (BEP-95 + quarterly burn)\nMint/Freeze/Upgrade risk: LOW/N/A\nChain: BNB Chain, 45 validators, PoSA consensus\nExchange: Binance SAFU fund ~$1B\nOverall risk: LOW \u2014 native L1 tokens have lowest security risk.'},
+'token-health':{prompt:'Overall health check for BNB',output:'$BNB HEALTH SCORE: 8.2/10\nLiquidity: 10/10 (0.001% spread, $400K depth)\nVolume: 8/10 ($81M, declining from peak)\nPrice: 6/10 (1D overbought, 4H oversold)\nDerivatives: 7/10 (neutral funding, deleveraging)\nFundamentals: 9/10 ($1.2B revenue, $600M burns/yr)\nSecurity: 9/10 (native L1, no contract risk)\nVerdict: HEALTHY \u2014 institutional-grade asset.'},
+'token-comparison':{prompt:'Compare BNB vs ETH vs SOL',output:'$BNB vs ETH vs SOL\nBNB: $689 (-2.2%) | MCap $100B | Vol $81M | RSI 76.5\nETH: $2,436 (-2.2%) | MCap $293B | Vol $758M | RSI ~55\nSOL: $103 (-2.6%) | MCap $48B | Vol $395M | RSI ~48\nRevenue: BNB $1.2B | ETH $2.5B | SOL $0.8B\nTVL: BNB $5.5B | ETH $48B | SOL $4.2B\nVerdict: BNB most stable, ETH largest, SOL most volatile.'},
+'token-similarity':{prompt:'Find tokens behaving similarly to BNB',output:'$BNB SIMILARITY\nHigh correlation: ETH (0.85), BTC (0.82), OKB (0.78)\nModerate: CRO (0.72), SOL (0.65)\nSimilar pullback pattern: ETH -2.17%, AVAX -1.67%, LINK -3.47%\nBNB unique: Dual utility (exchange + L1), auto-burn, Binance backing\nCEX peers: OKB (smaller), CRO (less dominant), GT (smallest)'},
+'holder-analysis':{prompt:'Analyze BNB holder distribution and concentration',output:'$BNB HOLDERS\nTop 10 wallets: ~65% of supply (HIGH concentration)\nBinance hot wallet: ~40M BNB (27%)\nBinance cold: ~18M (12%)\nStaking: ~22M (15%) \u2014 locked, illiquid\nTop 10 non-exchange: ~15M (10%)\nRetail: ~51M (35%)\nQuarterly burns: ~$150\u2013200M BNB\nVerdict: Concentrated but manageable. Exchange dominance is main risk.'},
+'wallet-profile':{prompt:'Analyze key wallets for BNB',output:'$BNB WALLET PROFILE\n#1 Binance Hot: ~40M BNB ($27.6B) \u2014 high activity, exchange ops\n#2 Staking Contract: ~22M BNB ($15.2B) \u2014 passive, locked\n#3 Binance Cold: ~18M BNB ($12.4B) \u2014 strategic reserve\n#4\u201310 Unknown/Inst: ~15M BNB ($10.3B) \u2014 mixed behavior\nVerdict: BNB held primarily by Binance and staking \u2014 not whale-dominated.'},
+'wallet-data':{prompt:'Raw account/wallet data for BNB',output:'$BNB WALLET DATA\nBinance hot: ~40M BNB | Cold: ~18M | Staking: ~22M\nTotal Binance-controlled: ~80M BNB (55% of circulating)\nOrder book largest bid: 57.6 BNB at $688.07\nOrder book largest ask: 62.1 BNB at $689.98\nSupply: Binance 40% | Staked 15% | Whales 10% | Retail 35%'},
+'whale-analysis':{prompt:'Large-wallet activity for BNB',output:'$BNB WHALE ANALYSIS\nLargest bid: $688.07 (57.6 BNB / $39.7K) \u2014 whale absorption\nLargest ask: $689.98 (62.1 BNB / $42.8K) \u2014 whale supply\nBid/ask creates $1.91 range \u2014 classic range-bound market-making\nLarge trades (>$10K): ~20% of volume\nSignal: NEUTRAL \u2014 both sides active, no directional commitment'},
+'whale-tracker':{prompt:'Track specific whale wallets over time for BNB',output:'$BNB WHALE TRACKER\nBinance Hot Wallet: ~40M BNB, normal operations\nMarket Makers: Large limits at $688/$690, ~$40K each\nUnknown Whales: ~20% of daily volume is large trades\nAlert thresholds: >$1M deposit/withdrawal, >$100K walls\nCurrent: No alerts triggered. Normal operations.'},
+'smart-money':{prompt:'Smart-money activity detection for BNB',output:'$BNB SMART MONEY\nFunding: Neutral (0.0043%) \u2014 no crowd\nOI: -1.0% (48h) \u2014 deleveraging\nCVD: +$0.8M/hr \u2014 mild taker buying\nVolume profile: Price below POC ($697) \u2014 undervalued\nLiquidation: Longs at $677\u2013$682, shorts at $708\u2013$712\nScorecard: +1 (SLIGHT BULL) \u2014 cautiously positioning'},
+'smart-money-radar':{prompt:'What smart money is doing today with BNB',output:'$BNB SMART MONEY RADAR\nVolume: $81.3M (above avg) \u2014 BEARISH direction\nPrice: -2.2% pullback within uptrend\nPositioning: Longs closing (-1% OI), not shorts building\nOrder book: Range-bound market-making\nDashboard: Accumulation NOT DETECTED | Distribution MILD | Range trading ACTIVE\nVerdict: Reducing exposure, waiting for direction.'},
+'wallet-behavior':{prompt:'Classify observable wallet behavior for BNB',output:'$BNB WALLET BEHAVIOR\nExchange: OPERATIONAL (deposits match withdrawals)\nStaking: PASSIVE (22M locked, bullish supply reduction)\nMarket Maker: RANGE-BOUND ($688 bid, $690 ask)\nRetail: HOLDING (35% distributed, no panic selling)\nVerdict: No unusual behavior. Market operating normally.'},
+'wallet-overlap':{prompt:'Find wallets holding multiple tokens (BNB context)',output:'$BNB WALLET OVERLAP\nBNB ecosystem wallets typically hold: BNB, BTC, ETH, BUSD/USDT, CAKE, XVS, ALPACA\nCorrelation: BNB-BTC 0.82, BNB-ETH 0.85, BNB-CAKE 0.68\nConcentration risk: BNB Chain event impacts multiple positions\nDiversification within ecosystem: LOW\nVerdict: BNB holders are Binance ecosystem participants with concentrated portfolios.'},
+'liquidation-analysis':{prompt:'Liquidation context for BNB',output:'$BNB LIQUIDATIONS\nLong liqs: $685 (~$5M) \u2192 $682 (~$12M) \u2192 $677 (~$25M) \u2192 $670 (~$40M)\nShort liqs: $695 (~$8M) \u2192 $700 (~$15M) \u2192 $708 (~$30M) \u2192 $719 (~$50M)\nCurrent price $689 \u2014 closer to long liquidation zone\nSqueeze potential: NOT PRESENT (funding neutral)\nDownside cascade slightly more likely.'},
+'open-interest-analysis':{prompt:'Interpret BNB open interest trends',output:'$BNB OPEN INTEREST\nCurrent: $434.2M | 48h: -1.0% | 7d: +8.2%\nPeak: ~$450M (Aug 27, alongside price peak $719)\nOI-Price: Aug 22\u201327 OI +15% / Price +19% (new longs)\n         Aug 27\u201329 OI -3.5% / Price -4.2% (longs closing)\nPhase: HEALTHY DELEVERAGING \u2014 not bearish\nLeverage: ~12x avg, 25% >20x, 40% <5x'},
+'derivatives-data':{prompt:'Full derivatives snapshot for BNB',output:'$BNB DERIVATIVES SNAPSHOT\nFunding: +0.0043%/8h (5.2% ann.) | Regime: NORMAL\nOI: $434.2M (-1.0% 48h) | Trend: Declining from peak\nBasis: +$0.04 (+0.006%) \u2014 positive, normal\nCVD: 1H +$0.8M, 4H +$2.1M \u2014 mild taker buying\nLiq map: Long $685 (~$5M), Short $695 (~$8M)\nVerdict: Neutral funding, declining OI, healthy deleveraging.'},
+'narrative-analysis':{prompt:'What narrative is BNB riding?',output:'$BNB NARRATIVE\nPrimary: Exchange Token (largest by MCap, most utility)\nSecondary: L1 Chain (TVL $5.5B, DAU 1.2M)\nTertiary: Deflationary Asset ($600M burns/yr, 27% supply burned)\nMomentum: All neutral to positive\nBTC correlation: 0.82 \u2014 HIGH\nVerdict: Stable, mature asset without strong narrative momentum. Following BTC.'},
+'anomaly-hunter':{prompt:'What is unusual about BNB right now?',output:'$BNB ANOMALY SCAN\n1. RSI DIVERGENCE: 1D 76.5 vs 4H 28.6 \u2014 47.9pt gap, largest in 30 days\n2. VOLUME DECLINE: $81M from $987M peak (92% collapse)\n3. BB SQUEEZE 4H: Width 4.3% (<5% threshold)\n4. FUNDING-PRICE DIV: Price -2.2% but funding stays positive\n5. OI DECLINE: -1.0% with neutral funding \u2014 healthy\nVerdict: 4 anomalies. Most significant: RSI divergence. Resolution in 2\u20133 days.'},
+'bull-bear-analysis':{prompt:'Build the strongest bull case AND bear case for BNB',output:'\ud83d\udfe2 BULL (40%): 1D HH+HL intact, 4H RSI 28.6 oversold, $685 held 3x, funding neutral\nTP1 $700 (R:R 1.7:1) | TP2 $708 (2.5:1) | TP3 $719 (4.0:1) | Stop $677\n\n\ud83d\udd34 BEAR (35%): 1D RSI 76.5 overbought, 4H lower highs, BTC -2.12%, descending triangle\nTP1 $677 (R:R 1.8:1) | TP2 $655 (3.5:1) | TP3 $640 (5.0:1) | Stop $700\n\n\u26aa BASE (25%): Consolidation $685\u2013$708 for 2\u20133 days\n\nEV: ~$694 (0.7% above current) \u2014 slight upside bias'},
+'confluence-analysis':{prompt:'Where do independent signals agree on BNB?',output:'$BNB CONFLUENCE\nBullish (7): 1D trend, 4H RSI oversold, funding neutral, BB lower, $685 held 3x, CVD buy, structure intact\nBearish (7): 24h -2.2%, below 4H SMA7, BTC weak, 1D overbought, lower highs, vol declining, desc triangle\nWeighted: 60% bull, 40% bear\nVerdict: SPLIT \u2014 no clear confluence. WAIT setup.'},
+'confluence-engine':{prompt:'Where do independent signals agree \u2014 evidence-first?',output:'$BNB CONFLUENCE ENGINE\n1D Trend: BULLISH (HIGH conf)\n4H Momentum: BEARISH (HIGH conf)\nFunding: NEUTRAL (HIGH conf)\nVolume: BEARISH (MEDIUM conf)\nBTC: BEARISH (HIGH conf)\nBook: NEUTRAL (HIGH conf)\nAgreement: MOSTLY BEARISH (3 vs 1 vs 2)\nBUT: 1D trend carries highest weight\nNET: MIXED \u2014 no clear confluence'},
+'contradiction-analysis':{prompt:'Find contradictions in BNB setup',output:'$BNB CONTRADICTIONS\n1. RSI: 1D 76.5 (overbought) vs 4H 28.6 (oversold) \u2014 timeframe conflict\n2. Trend vs Momentum: 1D bullish HH+HL vs 4H bearish lower highs\n3. Volume vs Price: Above-avg volume on decline = distribution, but OI declining = healthy\n4. Funding vs Price: Funding positive despite selloff = bids absorbing\nResolution: Trade 4H direction, use 1D for bias. Wait for $685 vs $708 decision.'},
+'contradiction-engine':{prompt:'Find contradictions inside current setup',output:'$BNB CONTRADICTION ENGINE\n1. Structure: 1D BULLISH + 4H BEARISH (opposite readings)\n2. RSI: OVERBOUGHT 1D + OVERSOLD 4H (both suggest reversal, opposite directions)\n3. Volume: DECLINING + ABOVE AVERAGE (still active but losing steam)\n4. Positioning: NEUTRAL FUNDING + DECLINING OI (deleveraging, not positioning)\nPriority: RSI divergence > Structure > Volume > Positioning'},
+'scenario-analysis':{prompt:'Structured bull/base/bear scenarios for BNB',output:'\ud83d\udfe2 BULL (35%): $685 holds + BTC stabilizes \u2192 $700 \u2192 $708 \u2192 $719 (2\u20135d)\nR:R 2.5:1 | Stop $680 | Invalidation: 4H close <$677\n\n\u26aa BASE (40%): $685\u2013$708 oscillation for 3\u20137d. Wait for breakout direction.\n\n\ud83d\udd34 BEAR (25%): $685 breaks + BTC <$76,800 \u2192 $677 \u2192 $655 \u2192 $640\nR:R 3.0:1 | Stop $700 | Invalidation: 4H close >$708\n\nEV: $691 (0.3% above current)'},
+'thesis-builder':{prompt:'Turn analysis into evidence-based thesis',output:'$BNB THESIS\nThesis: BNB is in a healthy pullback within a larger bullish structure. 4H oversold creates bounce opportunity, but 1D overbought limits upside.\nFor (6): 1D structure, 4H RSI, BB lower, funding neutral, $685 held 3x, CVD buy\nAgainst (5): 1D overbought, 4H lower highs, BTC weak, vol declining, desc triangle\nConfidence: MEDIUM (60% for, 40% against)\nInvalidation: 4H close <$677 = thesis broken'},
+'thesis-broker':{prompt:'Actively try to disprove the thesis',output:'$BNB THESIS BREAKER\nThesis: "Pullback within uptrend"\nCounter-evidence:\n1. 1D RSI 76.5 \u2014 could be TOP, not pullback\n2. Descending triangle \u2014 BEARISH pattern, target $651\n3. BTC bearish skew \u2014 altcoins vulnerable\n4. Volume declining 92% \u2014 no buyers stepping in\n5. 4H structure bearish \u2014 lower highs intact\nVerdict: Thesis FRAGILE \u2014 $685 is the line in the sand'},
+'signal-attribution':{prompt:'Which evidence most plausibly contributed to the move?',output:'$BNB SIGNAL ATTRIBUTION\nMove: -2.2% ($704 \u2192 $689) over 24h\n| Factor | Weight | Contribution |\n| BTC weakness | 50% | -1.1% |\n| 1D overbought reversion | 30% | -0.66% |\n| 4H bearish structure | 15% | -0.33% |\n| Positioning cleanup | 5% | -0.11% |\nVerdict: Market-driven move, not BNB-specific'},
+'move-explainer':{prompt:'Why did BNB move today?',output:'$BNB MOVE EXPLAINER\nMove: -2.2% ($704 \u2192 $689) over 24h\nCausal chain:\n1. BTC sold off -2.12% (primary driver)\n2. BNB followed with 0.82 correlation\n3. 1D overbought RSI amplified the move\n4. 4H lower highs provided technical selling\n5. Volume 1.25x = moderate conviction\nKey: MARKET-WIDE selloff, not BNB-specific. BNB performing in line with peers.'},
+'historical-analogy':{prompt:'Find similar historical conditions for BNB',output:'$BNB HISTORICAL ANALOGY\nCurrent: Rally +31.7% ($546\u2192$719) then pullback -4.2%\nBest match: Aug 2025 rally $580\u2192$700 (+20.7%)\nThen: -11.4% pullback to $620, consolidated 2 weeks, continued higher\nSimilarity: 75%\nKey difference: BTC was bullish in 2025, currently bearish in 2026\nPrediction: 2\u20133 week consolidation, then continuation IF BTC stabilizes'},
+'market-breadth':{prompt:'Is this broad market strength or narrow leadership?',output:'$BNB MARKET BREADTH\nTop-10 crypto: ALL RED (0/10 advancing)\nAdvance/Decline: EXTREMELY POOR\nSectors: L1s -2.5%, DeFi -3.2%, CEX -2.2%, Meme -4.1%\nRegime: RISK-OFF \u2014 broad selloff\nBNB in line with peers \u2014 not uniquely weak\nVerdict: Market-wide move driven by BTC weakness'},
+'market-xray':{prompt:'Complete picture of BNB right now',output:'$BNB MARKET X-RAY\nPrice: $689.12 (-2.2%) | Range: $685\u2013$708\n1D: Bullish (HH+HL) | RSI 76.5 overbought\n4H: Bearish (lower highs) | RSI 28.6 oversold\nFunding: +0.0043% (neutral) | OI: $434M (-1%)\nLiquidity: 0.001% spread, $400K depth \u2014 institutional\nBTC: -2.12% at $77,495 | Breadth: All red\nShort-term: Bearish | Medium: Neutral | Long: Bullish'},
+'daily-brief':{prompt:'Morning brief for BNB',output:'$BNB DAILY BRIEF \u2014 Aug 29, 2026\nPrice: $689.12 (-2.2%) | Vol: $81M | Funding: +0.004% | OI: $434M\n1D: Bullish (RSI 76.5) | 4H: Bearish (RSI 28.6) | 1H: Neutral ($687\u2013$692)\nSupport: $685 (must hold) | $677 (breakdown)\nResistance: $708 (must clear) | $719 (target)\nAction: STAND ASIDE \u2014 conflicting timeframes, no clean setup'},
+'daily-intelligence':{prompt:'Attention allocation dashboard',output:'$BNB ATTENTION ALLOCATION\nHIGH (hourly): 4H RSI 28.6 oversold watch, $685 support, BTC $76,800\nMED (4H): 1H range resolution, volume spike, CVD direction\nLOW (daily): Funding regime, OI stabilization, narrative\nNow: Monitor $685 and 4H RSI\nWhen RSI 50+: reassess | When $685 breaks: urgent'},
+'research-report':{prompt:'Full research report on BNB',output:'$BNB RESEARCH REPORT\nThesis: Blue-chip with strong fundamentals, in technical pullback.\nFundamentals: $1.2B revenue, $600M burns, $5.5B TVL, 1.2M DAU \u2014 STRONG\nTechnicals: 1D bullish, 4H bearish \u2014 MIXED\nDerivatives: Neutral funding, deleveraging \u2014 NEUTRAL\nValuation: P/E ~83x \u2014 FAIR\nRisks: BTC correlation (HIGH), regulatory (MED), concentration (MED)\nRecommendation: WAIT for better entry. Target $655\u2013$677 if pullback extends.'},
+'research-memory':{prompt:'What do we already know from past research?',output:'$BNB RESEARCH MEMORY\nPrevious thesis: Blue-chip with strong fundamentals \u2014 STILL VALID\nLevels tracked: $685 (must hold), $708 (must clear), $719 (target)\nPast warnings: 1D overbought at $719 \u2713 (pullback happened)\nBTC weakness could drag BNB \u2014 monitoring\nDescending triangle forming \u2014 watch $685\nAction: Continue monitoring. No new research needed.'},
+'trade-journal':{prompt:'Trade journal entry for BNB',output:'$BNB TRADE JOURNAL \u2014 Aug 29, 2026\nAction: NO TRADE (STAND ASIDE)\nReason: 4H range 6.2% at threshold, conflicting timeframes, no clean trigger, BTC bearish\nWatch: Long $690+ with vol+CVD | Short $708 with RSI\u226562+rejection\nInvalidation: $677 close\nRisk state: 0 SL today | Streak: 2 | Kill-switch available\nNext: When 4H RSI reaches 50+ or $685 breaks'},
+};
+
 const TICKER = [
   ['BTCUSDT · funding +0.014% · confirmed by 3 sources','teal'],
   ['ETHUSDT · OI +6.2% (4h) · contradicted by spot flow','rose'],
@@ -990,10 +1101,10 @@ const TICKER = [
 ];
 
 const TABS = {
-  'Hermes':'# 1) install the skill library\ngit clone https://github.com/hermesagent01/omb-skill-library.git ~/.hermes/skills/oh-my-binance\n\n# 2) restart Hermes, then connect Agent OS\nhermes mcp add binance --url https://agent.binance.com/mcp/agentic --auth oauth',
-  'Claude Code':'# 1) clone into a project folder\ngit clone https://github.com/hermesagent01/omb-skill-library.git oh-my-binance && cd oh-my-binance\n\n# 2) inside the session, connect Agent OS\nclaude mcp add binance --transport http https://agent.binance.com/mcp/agentic',
-  'Codex CLI':'# add to ~/.codex/config.toml\n[mcp_servers.binance]\nurl = "https://agent.binance.com/mcp/agentic"\n\n# then clone the library anywhere and open a session in it\ngit clone https://github.com/hermesagent01/omb-skill-library.git',
-  'Any other agent':'git clone https://github.com/hermesagent01/omb-skill-library.git oh-my-binance\n\nOpen the folder with your agent. It reads AGENTS.md and bootstraps itself.',
+  'Hermes':'# 1) install the skill library\ngit clone https://github.com/hermesagent01/oh-my-binance.git ~/.hermes/skills/oh-my-binance\n\n# 2) restart Hermes, then connect Agent OS\nhermes mcp add binance --url https://agent.binance.com/mcp/agentic --auth oauth',
+  'Claude Code':'# 1) clone into a project folder\ngit clone https://github.com/hermesagent01/oh-my-binance.git oh-my-binance && cd oh-my-binance\n\n# 2) inside the session, connect Agent OS\nclaude mcp add binance --transport http https://agent.binance.com/mcp/agentic',
+  'Codex CLI':'# add to ~/.codex/config.toml\n[mcp_servers.binance]\nurl = "https://agent.binance.com/mcp/agentic"\n\n# then clone the library anywhere and open a session in it\ngit clone https://github.com/hermesagent01/oh-my-binance.git',
+  'Any other agent':'git clone https://github.com/hermesagent01/oh-my-binance.git oh-my-binance\n\nOpen the folder with your agent. It reads AGENTS.md and bootstraps itself.',
 };
 
 const FAQ = [
@@ -1017,15 +1128,35 @@ SKILLS.forEach(([name,desc,cat])=>{
   c.className = 'skill-card';
   c.style.setProperty('--cat-color', CATS[cat].color);
   c.dataset.cat = cat;
+  c.dataset.name = name;
   c.dataset.text = (name+' '+desc).toLowerCase();
+  const ex = SKILL_EXAMPLES[name];
+  const expandHtml = ex ? `
+    <div class="skill-expand">
+      <div class="skill-expand-prompt">${ex.prompt}</div>
+      <div class="skill-expand-output">${ex.output}</div>
+      <span class="skill-expand-close">close \u00d7</span>
+    </div>` : '';
   c.innerHTML = `
     <div class="skill-top">
       <span class="skill-name">${name}</span>
       <span class="skill-dot"></span>
     </div>
     <p class="skill-desc">${desc}</p>
-    <span class="skill-cat">${CATS[cat].label}</span>`;
+    <span class="skill-cat">${CATS[cat].label}</span>
+    ${expandHtml}`;
   skillGrid.appendChild(c);
+});
+
+// skill card expand/collapse
+skillGrid.addEventListener('click', e=>{
+  const card = e.target.closest('.skill-card');
+  if(!card) return;
+  if(e.target.classList.contains('skill-expand-close')){
+    card.classList.remove('open');
+    return;
+  }
+  card.classList.toggle('open');
 });
 
 function filterSkills(){
@@ -1155,6 +1286,14 @@ window.OMB_EXAMPLES = [{"skill":null,"prompt":"Give me a trader-style snapshot o
 </script>
 <script>
 // ---------- live examples: render + filter + modal ----------
+// append 56 BNB skill examples
+(function(){
+const BNB=[['coin-ta','Run full technical analysis on BNBUSDT \u2014 1D/4H/1H structure, levels, range, funding, order book','\u2550\u2550\u2550 FULL TA READOUT \u2014 BNBUSDT \u2550\u2550\u2550\n1D: HH+HL (bullish) | $689.12 | range $546\u2013$727 (33%) | RSI 76.5\n4H: Mixed | range $677\u2013$719 (6.2%) | RSI 28.6 | ADX 29.5\n1H: swing hi $689.82 / lo $687.20 | RSI 48.8 | ATR $2.03\nFlow: Funding +0.0043% | OI $434.2M (-1.0%) | CVD +$0.8M/hr\nVerdict: \ud83d\udd34 STAND ASIDE \u2014 4H range 6.2% at threshold\nWatch: 1H MSB >$689.82 (long) / <$687.20 (short)'],['funding-analysis','What is BNB perpetual funding rate, trend, and regime?','BNB FUNDING\nCurrent: +0.0043%/8h (0.0516% ann.) | Regime: NORMAL\n24h avg: +0.048% | 7d avg: +0.031% | Trend: Flat \u2192 declining\nSqueeze: LOW \u2014 far from crowded thresholds\nVerdict: No actionable signal. Wait for regime shift.'],['orderbook-analysis','Analyze BNB bid/ask pressure and notable walls','BNB ORDER BOOK\nSpread: $0.01 (0.001%) \u2014 EXCELLENT\nBids: 582.5 BNB ($401K) | Asks: 530.2 BNB ($365K) | Ratio: 1.10x\nLargest bid: $688.07 (57.6 BNB) | Largest ask: $689.98 (62.1 BNB)\nSlippage: $10K <0.01% | $100K ~0.05% | $500K ~0.15%\nVerdict: Balanced book with slight bid support.'],['market-structure','Map BNB trend state, ranges, and key structural levels','BNB STRUCTURE\n1D: HH+HL (bullish) from $546. Range $547\u2013$727 (33%)\n4H: BEARISH lower highs $719\u2192$716\u2192$708\u2192$691. Flat lows $685 = desc triangle\n1H: FLAT $687\u2013$690 tight compression\nKey: $719 (clear), $708 (resist), $697 (SMA7), $685 (CRITICAL), $677 (break)'],['liquidity-analysis','Assess BNB liquidity quality \u2014 depth, spread, slippage risk','BNB LIQUIDITY\nSpread: 0.001% \u2014 EXCELLENT\nDepth: ~$400K each side at \u00b11% \u2014 HIGH\nSlippage: $100K <0.05%\nScore: 9/10 \u2014 INSTITUTIONAL GRADE\nVerdict: World-class liquidity. Safe up to $100K.'],['volatility-analysis','What is BNB volatility regime \u2014 squeeze or expansion?','BNB VOLATILITY\nATR(14) 1D: $20.33 (2.95%) \u2014 declining from $35 peak\nBB Width 4H: 4.3% (NARROW \u2014 compression)\nRegime: POST-EXPANSION \u2192 COMPRESSION (squeeze building)\nSqueeze score: 7/10 \u2014 resolution in 2\u20133 days\nBias: Slightly bearish (lower highs + 1D overbought)'],['range-trading','Is BNB ranging? Where are the boundaries?','BNB RANGE\n4H: $677\u2013$719 (6.2%) \u2014 BORDERLINE\nPosition: 81% up (near top) | Bias: LH/LL = bearish drift\nMSB: WATCHING \u2014 no trigger\n1H: $687\u2013$690 tight compression\nVerdict: Neither engine active. WAIT setup.'],['support-resistance','Map support and resistance levels for BNB','BNB S/R\nResist: $689.82 \u2192 $700.35 \u2192 $708.71 \u2192 $719.14 \u2192 $727.15\nSupport: $687.20 \u2192 $685.39 \u2192 $677.29 \u2192 $655.16\nPrice $689: $2.92 ABOVE support, $8.06 BELOW resistance\nFlip zones: $685.39 R\u2192S, $697.18 S\u2192R'],['volume-analysis','Abnormal volume detection and interpretation','BNB VOLUME\n24h: $81.3M (1.25x avg) \u2014 NORMAL\nTrend: Declining from $987M peak (92% contraction)\nProfile: HVN $697\u2013$702, LVN $685\u2013$690, POC ~$697\nPrice below POC = bearish\nVerdict: Distribution/consolidation after rally.'],['market-data','Raw market data pull for BNB','BNB/USDT DATA\nLast: $689.12 | 24h: $705\u2013$708\u2013$685 (-2.22%)\nVol: $81.3M | Spread: $0.01 | Depth: 582/530 BNB\nFunding: +0.0043% | OI: $434.2M (-1.0%)\nRSI: 1D 76.5 | 4H 28.6 | 1H 48.8\nBB: 1D $655\u2013$735 | 4H $685\u2013$715'],['token-profile','Complete token identity for BNB','BNB PROFILE\nName: BNB | Chain: BNB Chain | Type: L1 + Exchange\nLaunch: July 2017 | Age: 7+ years\nMCap: ~$100B | Supply: 145.9M/200M | Burned: 27%\nTVL: $5.5B | DAU: 1.2M | 3M daily txns\nRisk: Concentrated in Binance ecosystem'],['token-security','Check BNB contract security and audit status','BNB SECURITY\nType: Native L1 (no smart contract risk)\nSupply: Auto-burn quarterly (BEP-95)\nMint/Freeze/Upgrade: LOW/N/A\nChain: 45 validators, PoSA | SAFU ~$1B\nOverall: LOW risk \u2014 native L1 tokens'],['token-health','Overall health check for BNB','BNB HEALTH: 8.2/10\nLiquidity: 10/10 | Volume: 8/10 | Price: 6/10\nDerivatives: 7/10 | Fundamentals: 9/10 | Security: 9/10\nVerdict: HEALTHY \u2014 institutional-grade asset'],['token-comparison','Compare BNB vs ETH vs SOL','BNB vs ETH vs SOL\nBNB: $689 (-2.2%) | MCap $100B | RSI 76.5\nETH: $2,436 (-2.2%) | MCap $293B | RSI ~55\nSOL: $103 (-2.6%) | MCap $48B | RSI ~48\nVerdict: BNB most stable, ETH largest, SOL most volatile'],['token-similarity','Find tokens behaving similarly to BNB','BNB SIMILARITY\nHigh corr: ETH (0.85), BTC (0.82), OKB (0.78)\nModerate: CRO (0.72), SOL (0.65)\nUnique: Dual utility, auto-burn, Binance backing\nCEX peers: OKB, CRO, GT'],['holder-analysis','Analyze BNB holder distribution and concentration','BNB HOLDERS\nTop 10: ~65% (HIGH concentration)\nBinance hot: 27% | Cold: 12% | Staking: 15%\nTop 10 non-exchange: 10% | Retail: 35%\nBurns: ~$150\u2013200M/quarter\nVerdict: Concentrated but manageable'],['wallet-profile','Analyze key wallets for BNB','BNB WALLETS\n#1 Binance Hot: 40M BNB ($27.6B)\n#2 Staking: 22M BNB ($15.2B)\n#3 Binance Cold: 18M BNB ($12.4B)\n#4\u201310 Unknown: 15M BNB ($10.3B)\nVerdict: Not whale-dominated'],['wallet-data','Raw account/wallet data for BNB','BNB WALLET DATA\nBinance-controlled: ~80M BNB (55%)\nLargest bid: 57.6 BNB at $688.07\nLargest ask: 62.1 BNB at $689.98\nSupply: Binance 40% | Staked 15% | Whales 10% | Retail 35%'],['whale-analysis','Large-wallet activity for BNB','BNB WHALE\nBid: $688.07 (57.6 BNB / $39.7K) \u2014 absorption\nAsk: $689.98 (62.1 BNB / $42.8K) \u2014 supply\nRange: $1.91 \u2014 market-making\nLarge trades: ~20% of volume\nSignal: NEUTRAL'],['whale-tracker','Track specific whale wallets over time for BNB','BNB WHALE TRACKER\nBinance Hot: normal ops | MM: $688/$690 limits\nUnknown: ~20% large trades | Alerts: none triggered\nVerdict: No unusual activity'],['smart-money','Smart-money activity detection for BNB','BNB SMART MONEY\nFunding: Neutral | OI: -1% (deleveraging)\nCVD: +$0.8M/hr (mild buy)\nProfile: Price below POC ($697) \u2014 undervalued\nScorecard: +1 (SLIGHT BULL)'],['smart-money-radar','What smart money is doing today with BNB','BNB RADAR\nVolume: $81M (above avg) \u2014 BEARISH direction\nPositioning: Longs closing (-1% OI)\nBook: Range-bound market-making\nDashboard: Accumulation NOT | Distribution MILD | Range ACTIVE'],['wallet-behavior','Classify observable wallet behavior for BNB','BNB WALLET BEHAVIOR\nExchange: OPERATIONAL | Staking: PASSIVE (bullish)\nMarket Maker: RANGE-BOUND | Retail: HOLDING\nVerdict: No unusual behavior'],['wallet-overlap','Find wallets holding multiple tokens (BNB context)','BNB OVERLAP\nEcosystem wallets: BNB, BTC, ETH, CAKE, XVS\nCorrelation: BNB-BTC 0.82, BNB-ETH 0.85\nConcentration risk: HIGH within ecosystem\nDiversification: LOW'],['liquidation-analysis','Liquidation context for BNB','BNB LIQUIDATIONS\nLong liqs: $685 (~$5M) \u2192 $677 (~$25M)\nShort liqs: $695 (~$8M) \u2192 $708 (~$30M)\nCurrent $689: closer to long zone\nSqueeze: NOT PRESENT (funding neutral)\nDownside cascade slightly more likely'],['open-interest-analysis','Interpret BNB open interest trends','BNB OI\nCurrent: $434.2M | 48h: -1.0% | 7d: +8.2%\nPeak: $450M (Aug 27)\nPhase: HEALTHY DELEVERAGING \u2014 longs closing\nLeverage: ~12x avg | 25% >20x | 40% <5x'],['derivatives-data','Full derivatives snapshot for BNB','BNB DERIVATIVES\nFunding: +0.0043%/8h | OI: $434M (-1%)\nBasis: +$0.04 (+0.006%) \u2014 positive\nCVD: 1H +$0.8M | 4H +$2.1M\nLiq: Long $685 (~$5M), Short $695 (~$8M)\nVerdict: Neutral, healthy deleveraging'],['narrative-analysis','What narrative is BNB riding?','BNB NARRATIVE\nPrimary: Exchange Token (largest, most utility)\nSecondary: L1 Chain (TVL $5.5B, DAU 1.2M)\nTertiary: Deflationary ($600M burns/yr)\nBTC correlation: 0.82 \u2014 HIGH\nVerdict: Stable, following BTC'],['anomaly-hunter','What is unusual about BNB right now?','BNB ANOMALIES\n1. RSI divergence: 1D 76.5 vs 4H 28.6 (47.9pt gap)\n2. Volume decline: 92% from peak\n3. BB squeeze 4H: 4.3% (<5%)\n4. Funding stays positive despite selloff\nVerdict: 4 anomalies. RSI divergence most significant'],['bull-bear-analysis','Build the strongest bull case AND bear case for BNB','\ud83d\udfe2 BULL (40%): 1D HH+HL, 4H RSI 28.6, $685 held 3x\nTP: $700/$708/$719 | Stop $677\n\ud83d\udd34 BEAR (35%): 1D RSI 76.5, lower highs, BTC weak\nTP: $677/$655/$640 | Stop $700\n\ud83d\udfe1 BASE (25%): $685\u2013$708 consolidation\nEV: ~$694 (0.7% upside)'],['confluence-analysis','Where do independent signals agree on BNB?','BNB CONFLUENCE\nBull (7): 1D trend, 4H RSI, funding, BB, $685, CVD, structure\nBear (7): 24h -2.2%, below SMA7, BTC, 1D RSI, lower highs, vol, triangle\nWeighted: 60% bull, 40% bear\nVerdict: SPLIT \u2014 WAIT setup'],['confluence-engine','Where do independent signals agree \u2014 evidence-first?','BNB CONFLUENCE ENGINE\n1D Trend: BULLISH | 4H Momentum: BEARISH\nFunding: NEUTRAL | Volume: BEARISH\nBTC: BEARISH | Book: NEUTRAL\nAgreement: MOSTLY BEARISH (3 vs 1 vs 2)\nBUT: 1D trend highest weight\nNET: MIXED \u2014 no clear confluence'],['contradiction-analysis','Find contradictions in BNB setup','BNB CONTRADICTIONS\n1. RSI: 1D 76.5 vs 4H 28.6 (timeframe conflict)\n2. Trend vs Momentum: 1D bull vs 4H bear\n3. Volume: Above-avg on decline = distribution\n4. Funding: Positive despite selloff = absorption\nResolution: Trade 4H, use 1D for bias'],['contradiction-engine','Find contradictions inside current setup','BNB CONTRADICTION ENGINE\n1. 1D BULLISH + 4H BEARISH (opposite)\n2. OVERBOUGHT 1D + OVERSOLD 4H\n3. DECLINING + ABOVE-AVG volume\n4. NEUTRAL FUNDING + DECLINING OI\nPriority: RSI > Structure > Volume > Positioning'],['scenario-analysis','Structured bull/base/bear scenarios for BNB','\ud83d\udfe2 BULL (35%): $685 holds \u2192 $700 \u2192 $708 \u2192 $719\nR:R 2.5:1 | Stop $680 | Inval: <$677\n\ud83d\udfe1 BASE (40%): $685\u2013$708 for 3\u20137d\n\ud83d\udd34 BEAR (25%): $685 breaks \u2192 $677 \u2192 $655 \u2192 $640\nR:R 3.0:1 | Stop $700 | Inval: >$708\nEV: $691 (0.3% upside)'],['thesis-builder','Turn analysis into evidence-based thesis','BNB THESIS\nThesis: Healthy pullback in bullish structure. 4H oversold = bounce, 1D overbought limits upside.\nFor (6): 1D structure, 4H RSI, BB, funding, $685, CVD\nAgainst (5): 1D overbought, lower highs, BTC, vol, triangle\nConfidence: MEDIUM (60/40)\nInvalidation: 4H close <$677'],['thesis-broker','Actively try to disprove the thesis','BNB THESIS BREAKER\nThesis: "Pullback within uptrend"\nCounters: 1D RSI 76.5 (TOP?), desc triangle, BTC bearish, vol declining 92%, 4H bearish\nVerdict: FRAGILE \u2014 $685 is the line'],['signal-attribution','Which evidence most plausibly contributed to the move?','BNB ATTRIBUTION\nMove: -2.2% over 24h\nBTC weakness: 50% (-1.1%)\n1D overbought: 30% (-0.66%)\n4H structure: 15% (-0.33%)\nPositioning: 5% (-0.11%)\nVerdict: Market-driven, not BNB-specific'],['move-explainer','Why did BNB move today?','BNB MOVE\n-2.2% ($704 \u2192 $689) over 24h\n1. BTC sold -2.12% (primary)\n2. BNB followed (0.82 corr)\n3. 1D overbought amplified\n4. 4H lower highs added selling\n5. Volume 1.25x = moderate\nKey: Market-wide, not BNB-specific'],['historical-analogy','Find similar historical conditions for BNB','BNB ANALOGY\nCurrent: +31.7% rally then -4.2% pullback\nBest match: Aug 2025 $580\u2192$700 (+20.7%)\nThen: -11.4% pullback, consolidated 2 weeks, continued\nSimilarity: 75%\nKey diff: BTC bearish now vs bullish then\nPrediction: 2\u20133 week consolidation'],['market-breadth','Is this broad market strength or narrow leadership?','BNB BREADTH\nTop-10: ALL RED (0/10 advancing)\nA/D: EXTREMELY POOR\nSectors: L1s -2.5%, DeFi -3.2%, CEX -2.2%\nRegime: RISK-OFF \u2014 broad selloff\nBNB in line \u2014 not uniquely weak'],['market-xray','Complete picture of BNB right now','BNB X-RAY\nPrice: $689.12 (-2.2%) | Range: $685\u2013$708\n1D: Bullish RSI 76.5 | 4H: Bearish RSI 28.6\nFunding: +0.004% | OI: $434M (-1%)\nLiquidity: 0.001% spread, $400K depth\nBTC: -2.12% | Breadth: All red\nShort: Bear | Med: Neutral | Long: Bullish'],['daily-brief','Morning brief for BNB','BNB DAILY BRIEF \u2014 Aug 29\nPrice: $689.12 (-2.2%) | Vol: $81M\n1D: Bull RSI 76.5 | 4H: Bear RSI 28.6 | 1H: Neutral\nSupport: $685 (hold) | $677 (break)\nResist: $708 (clear) | $719 (target)\nAction: STAND ASIDE \u2014 conflicting timeframes'],['daily-intelligence','Attention allocation dashboard','BNB ATTENTION\nHIGH (hourly): 4H RSI 28.6, $685, BTC $76,800\nMED (4H): 1H range, volume spike, CVD\nLOW (daily): Funding, OI, narrative\nNow: Monitor $685 and 4H RSI\nWhen RSI 50+: reassess'],['research-report','Full research report on BNB','BNB REPORT\nThesis: Blue-chip in technical pullback\nFundamentals: $1.2B rev, $600M burns \u2014 STRONG\nTechnicals: 1D bull, 4H bear \u2014 MIXED\nDerivatives: Neutral \u2014 NEUTRAL\nValuation: P/E ~83x \u2014 FAIR\nRisks: BTC corr (HIGH), regulatory (MED)\nRecommendation: WAIT for better entry'],['research-memory','What do we already know from past research?','BNB MEMORY\nPrevious: Blue-chip strong fundamentals \u2014 VALID\nLevels: $685 (hold), $708 (clear), $719 (target)\nPast: 1D overbought warned \u2713 (pullback happened)\nWatch: $685 support, descending triangle\nAction: Continue monitoring'],['trade-journal','Trade journal entry for BNB','BNB TRADE JOURNAL \u2014 Aug 29\nAction: NO TRADE (STAND ASIDE)\nReason: 4H range 6.2%, conflicting TFs, no trigger\nWatch: Long $690+ vol+CVD | Short $708 RSI\u226562\nInvalidation: $677\nRisk: 0 SL today | Streak: 2']];
+const maxN=Math.max(...window.OMB_EXAMPLES.map(e=>e.n));
+BNB.forEach(([skill,prompt,output],i)=>{
+  window.OMB_EXAMPLES.push({skill,prompt,response:output,tags:['BNB',skill],data_note:null,n:maxN+1+i});
+});
+})();
 const EX_DATA = window.OMB_EXAMPLES || [];
 
 const catChip = (t) => `<span class="ex-tag">${t}</span>`;
@@ -1167,6 +1306,7 @@ function exCard(it){
   d.className = 'ex-card';
   d.dataset.text = (it.prompt + ' ' + it.response + ' ' + it.tags.join(' ')).toLowerCase();
   d.dataset.cat = it.tags[0] || 'misc';
+  d.dataset.skill = it.skill || '';
   d.innerHTML = `
     <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;">
       <span class="ex-num">${String(it.n).padStart(3,'0')}</span>
@@ -1179,10 +1319,10 @@ function exCard(it){
   return d;
 }
 
-// derive unique categories from first tag
-const cats = [...new Set(EX_DATA.map(i=>i.tags[0]).filter(Boolean))];
+// derive unique skill names from examples
+const allSkills = [...new Set(EX_DATA.map(i=>i.skill).filter(Boolean))];
 const chipRow = document.getElementById('chipRow');
-cats.forEach(c=>{
+allSkills.forEach(c=>{
   const b = document.createElement('button');
   b.className = 'chip'; b.textContent = c; b.dataset.cat = c;
   b.addEventListener('click', ()=>{
@@ -1201,7 +1341,7 @@ function filterExamples(){
   let shown = 0;
   exGrid.querySelectorAll('.ex-card').forEach(card=>{
     const okQ = !q || card.dataset.text.includes(q);
-    const okC = !activeCat || card.dataset.cat === activeCat;
+    const okC = !activeCat || card.dataset.skill === activeCat;
     card.style.display = (okQ && okC) ? '' : 'none';
     if(okQ && okC) shown++;
   });
